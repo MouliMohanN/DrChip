@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.drchip.android.views.custom.RectangleLinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:background="@android:color/white"
+    android:gravity="center"
+    android:padding="5dp"
+    android:id="@+id/rootLayout"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/service_icon"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        />
+
+    <TextView
+        android:id="@+id/service_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="service name"
+        android:textStyle="bold"
+        android:textColor="@color/titleColor"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:maxLines="2"
+        android:gravity="center"/>
+
+
+</com.drchip.android.views.custom.RectangleLinearLayout>
