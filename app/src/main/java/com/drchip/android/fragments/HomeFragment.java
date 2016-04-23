@@ -6,13 +6,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.drchip.android.R;
 import com.drchip.android.activities.BaseActivity;
 import com.drchip.android.activities.HomeActivity;
 import com.drchip.android.adapters.HomePageAdapter;
 import com.drchip.android.constants.DrChipConstants;
+import com.drchip.android.models.HomePageBundle;
 import com.drchip.android.models.HomePageOptions;
 
 import java.util.ArrayList;
@@ -44,9 +47,43 @@ public class HomeFragment extends BaseFragment {
         getActionBar().show();
         setHasOptionsMenu(true);
         setupActionBar();
-        List<HomePageOptions> homePageOptionsList = getHomePageOptionsList();
+        final List<HomePageOptions> homePageOptionsList = getHomePageOptionsList();
         homePageAdapter = new HomePageAdapter(baseActivity, homePageOptionsList);
         homePageGridView.setAdapter(homePageAdapter);
+        final DrChipConstants constants = new DrChipConstants();
+        homePageGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                HomePageBundle homePageBundle = new HomePageBundle();
+                HomePageOptions homePageOptions = homePageOptionsList.get(position);
+                String serviceType = homePageOptions.getType();
+
+                if(serviceType.equalsIgnoreCase(constants.COMPUTER_SERVICE)
+                        || serviceType.equalsIgnoreCase(constants.LAPTOP_SERVICE)
+                        || serviceType.equalsIgnoreCase(constants.CONTACT)){
+                    // show enter phone number page
+                    // place a visit
+                    homePageBundle.setType(constants.PLACE_A_VISIT);
+                    homePageBundle.setShowOs(false);
+                    loadSaveUserPhoneNumberFragment(homePageBundle);
+                } else if (serviceType.equalsIgnoreCase(constants.ACCESSORIES)
+                        || serviceType.equalsIgnoreCase(constants.OTHER)
+                        || serviceType.equalsIgnoreCase(constants.DATA_RECOVERY)) {
+                    // show enter phone number page
+                    // enquiry
+                    homePageBundle.setType(constants.ENQUIRY);
+                    homePageBundle.setShowOs(false);
+                    loadSaveUserPhoneNumberFragment(homePageBundle);
+                } else if(serviceType.equalsIgnoreCase(constants.ONLINE_TROUBLSHOOTING)){
+                    homePageBundle.setType(constants.PLACE_A_VISIT);
+                    homePageBundle.setShowOs(true);
+                    loadSaveUserPhoneNumberFragment(homePageBundle);
+                } else {
+                    Toast.makeText(baseActivity, serviceType + ", feature is comming soon", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
         return rootView;
     }
 
@@ -117,6 +154,15 @@ public class HomeFragment extends BaseFragment {
         homePageOptionsList.add(homePageOptions9);
 
         return homePageOptionsList;
+    }
+
+    private void loadSaveUserPhoneNumberFragment(HomePageBundle homePageBundle){
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("homePageBundle", homePageBundle);
+        SaveUserPhoneNumber saveUserPhoneNumber = new SaveUserPhoneNumber();
+        saveUserPhoneNumber.setArguments(bundle);
+        baseActivity.loadFragment(saveUserPhoneNumber, true, saveUserPhoneNumber.getClass().getSimpleName());
     }
 
 }

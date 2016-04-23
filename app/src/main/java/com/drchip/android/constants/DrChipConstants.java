@@ -15,4 +15,7 @@ public class DrChipConstants {
     public final String CONTACT = "Contact";
     public final String CHAT = "Chat";
 
+    public final String PLACE_A_VISIT = "Place a visit";
+    public final String ENQUIRY = "Enquiry";
+
 }
