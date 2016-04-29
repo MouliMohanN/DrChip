@@ -3,7 +3,9 @@
     xmlns:andorid="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:clipToPadding="false"
+    >
 
     <include layout="@layout/custom_toolbar"></include>
 
@@ -19,6 +21,10 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:layout_centerVertical="true"
+        android:layout_marginLeft="13dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginRight="13dp"
         android:elevation="10dp"
         >
 
@@ -45,7 +51,10 @@
             android:textColorHint="#ADADAD"
             android:textSize="18sp"
             android:background="@null"
+            android:focusableInTouchMode="true"
+            android:focusable="false"
             android:layout_toRightOf="@+id/phone_number_textview"
+            android:layout_toEndOf="@+id/phone_number_textview"
             />
 
         <RelativeLayout
@@ -131,8 +140,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="When to contact"
-                android:textColor="#000000"
-                android:gravity="center"
                 android:textSize="18sp"
                 android:layout_marginTop="5dp"
                 android:padding="10dp"
@@ -156,7 +163,7 @@
                 android:id="@+id/date_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="1/1/1970"
+                android:hint="DD/MM/YYYY"
                 android:textColorHint="#ADADAD"
                 android:textSize="18sp"
                 android:layout_marginTop="5dp"
@@ -197,7 +204,7 @@
                 android:id="@+id/time_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="12:00 Am"
+                android:hint="HH:MM"
                 android:textColorHint="#ADADAD"
                 android:textSize="18sp"
                 android:layout_marginTop="5dp"
@@ -207,19 +214,6 @@
                 android:layout_below="@id/date_label"
                 android:layout_toRightOf="@+id/time_label"
                 />
-
-            <ImageView
-                android:id="@+id/time_picker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:padding="10dp"
-                android:layout_toRightOf="@id/time_textview"
-                android:layout_toEndOf="@+id/time_textview"
-                android:layout_below="@+id/date_label"
-                android:src="@mipmap/launch_picker"
-                />
-
 
 
         </RelativeLayout>
@@ -245,6 +239,7 @@
                 android:background="#3F51B5"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
+                android:elevation="20dp"
                 />
 
         </RelativeLayout>
