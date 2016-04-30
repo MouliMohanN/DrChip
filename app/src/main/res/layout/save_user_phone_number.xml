@@ -1,248 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:andorid="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
-    >
+    android:orientation="vertical">
 
-    <include layout="@layout/custom_toolbar"></include>
-
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_vertical"
         >
 
-    <RelativeLayout
-        android:id="@+id/phone_number_label_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginEnd="13dp"
-        android:layout_marginRight="13dp"
-        android:elevation="10dp"
-        >
-
-        <TextView
-            android:id="@+id/phone_number_textview"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ph Number *"
-            android:textSize="18sp"
-            android:layout_margin="5dp"
-            android:padding="10dp"
-            />
-
-        <EditText
-            android:id="@+id/phone_number_edit_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:hint="1234567890"
-            android:maxLines="2"
-            android:scrollbars="vertical"
-            android:layout_margin="5dp"
-            android:padding="10dp"
-            android:textColorHint="#ADADAD"
-            android:textSize="18sp"
-            android:background="@null"
-            android:focusableInTouchMode="true"
-            android:focusable="false"
-            android:layout_toRightOf="@+id/phone_number_textview"
-            android:layout_toEndOf="@+id/phone_number_textview"
-            />
-
-        <RelativeLayout
-            android:id="@+id/os_root_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:layout_below="@+id/phone_number_edit_text"
+            android:clipToPadding="false"
+            android:orientation="vertical"
             >
 
-        <TextView
-            android:id="@+id/os_type_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:padding="10dp"
-            android:text="OS Type"
-            android:textSize="18sp"
-            android:layout_marginRight="10dp"
-            android:layout_marginEnd="10dp"
-            />
 
-        <EditText
-            android:id="@+id/os_type_edittext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="eg: windows"
-            android:textColorHint="#ADADAD"
-            android:layout_marginTop="5dp"
-            android:padding="10dp"
-            android:background="@null"
-            android:maxLines="3"
-            android:scrollbars="vertical"
-            android:layout_toRightOf="@+id/os_type_textview"
-            android:layout_marginLeft="35dp"
-            android:layout_marginStart="35dp"
-            />
+            <include layout="@layout/custom_toolbar"></include>
 
-        <TextView
-            android:id="@+id/os_version_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="OS Version"
-            android:textSize="18sp"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            android:padding="10dp"
-            android:layout_below="@+id/os_type_textview"
-            />
 
-        <EditText
-            android:id="@+id/os_version_edittext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="eg: windows 8"
-            android:textColorHint="#ADADAD"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:padding="10dp"
-            android:background="@null"
-            android:maxLines="3"
-            android:scrollbars="vertical"
-            android:layout_below="@+id/os_type_textview"
-            android:layout_toRightOf="@id/os_version_textview"
-            />
 
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/date_time_picker_relativelayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/os_root_layout"
-            >
-
-            <EditText
-                android:id="@+id/when_to_contact_textview"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="When to contact"
-                android:textSize="18sp"
-                android:layout_marginTop="5dp"
-                android:padding="10dp"
-                android:enabled="false"
-                />
+                android:layout_height="match_parent"
+                >
 
-            <TextView
-                android:id="@+id/date_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date: "
-                android:textSize="18sp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:padding="10dp"
-                android:layout_below="@+id/when_to_contact_textview"
-                />
+                <RelativeLayout
+                    android:id="@+id/phone_number_label_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="13dp"
+                    android:layout_marginLeft="13dp"
+                    android:layout_marginRight="13dp"
+                    android:layout_marginStart="13dp"
+                    android:elevation="10dp">
 
-            <TextView
-                android:id="@+id/date_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="DD/MM/YYYY"
-                android:textColorHint="#ADADAD"
-                android:textSize="18sp"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="70dp"
-                android:layout_marginStart="70dp"
-                android:padding="10dp"
-                android:layout_below="@+id/when_to_contact_textview"
-                android:layout_toRightOf="@+id/date_label"
-                android:layout_toEndOf="@+id/date_label"
-                />
+                    <TextView
+                        android:id="@+id/phone_number_textview"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:padding="10dp"
+                        android:text="Ph Number *"
+                        android:textSize="18sp" />
 
-            <ImageView
-                android:id="@+id/date_picker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:padding="10dp"
-                android:layout_toRightOf="@id/date_textview"
-                android:layout_toEndOf="@+id/date_textview"
-                android:layout_below="@+id/when_to_contact_textview"
-                android:src="@mipmap/launch_picker"
-                />
+                    <EditText
+                        android:id="@+id/phone_number_edit_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="5dp"
+                        android:layout_toEndOf="@+id/phone_number_textview"
+                        android:layout_toRightOf="@+id/phone_number_textview"
+                        android:background="@null"
+                        android:hint="1234567890"
+                        android:maxLines="2"
+                        android:padding="10dp"
+                        android:scrollbars="vertical"
+                        android:text=""
+                        android:textColorHint="#ADADAD"
+                        android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/time_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Time: "
-                android:textSize="18sp"
-                android:layout_below="@+id/date_label"
-                android:layout_marginTop="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginStart="5dp"
-                android:padding="10dp"
-                />
+                    <RelativeLayout
+                        android:id="@+id/os_root_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/phone_number_edit_text"
+                        android:layout_centerInParent="true"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="10dp">
 
-            <TextView
-                android:id="@+id/time_textview"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="HH:MM"
-                android:textColorHint="#ADADAD"
-                android:textSize="18sp"
-                android:layout_marginTop="5dp"
-                android:padding="10dp"
-                android:layout_marginLeft="70dp"
-                android:layout_marginStart="70dp"
-                android:layout_below="@id/date_label"
-                android:layout_toRightOf="@+id/time_label"
-                />
+                        <TextView
+                            android:id="@+id/os_type_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:text="OS Type"
+                            android:textSize="18sp" />
+
+                        <EditText
+                            android:id="@+id/os_type_edittext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="35dp"
+                            android:layout_marginStart="35dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/os_type_textview"
+                            android:background="@null"
+                            android:hint="eg: windows"
+                            android:maxLines="3"
+                            android:padding="10dp"
+                            android:scrollbars="vertical"
+                            android:textColorHint="#ADADAD" />
+
+                        <TextView
+                            android:id="@+id/os_version_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/os_type_textview"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:text="OS Version"
+                            android:textSize="18sp" />
+
+                        <EditText
+                            android:id="@+id/os_version_edittext"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/os_type_textview"
+                            android:layout_marginEnd="20dp"
+                            android:layout_marginStart="20dp"
+                            android:layout_toRightOf="@id/os_version_textview"
+                            android:background="@null"
+                            android:hint="eg: windows 8"
+                            android:maxLines="3"
+                            android:padding="10dp"
+                            android:scrollbars="vertical"
+                            android:textColorHint="#ADADAD" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/date_time_picker_relativelayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/os_root_layout">
+
+                        <EditText
+                            android:id="@+id/when_to_contact_textview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:enabled="false"
+                            android:padding="10dp"
+                            android:text="When to contact"
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/date_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/when_to_contact_textview"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:text="Date: "
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/date_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/when_to_contact_textview"
+                            android:layout_marginLeft="70dp"
+                            android:layout_marginStart="70dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toEndOf="@+id/date_label"
+                            android:layout_toRightOf="@+id/date_label"
+                            android:hint="DD/MM/YYYY"
+                            android:padding="10dp"
+                            android:textColorHint="#ADADAD"
+                            android:textSize="18sp" />
+
+                        <ImageView
+                            android:id="@+id/date_picker"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/when_to_contact_textview"
+                            android:layout_marginTop="5dp"
+                            android:layout_toEndOf="@+id/date_textview"
+                            android:layout_toRightOf="@id/date_textview"
+                            android:padding="10dp"
+                            android:src="@mipmap/launch_picker" />
+
+                        <TextView
+                            android:id="@+id/time_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/date_label"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginStart="5dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:text="Time: "
+                            android:textSize="18sp" />
+
+                        <TextView
+                            android:id="@+id/time_textview"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/date_label"
+                            android:layout_marginLeft="70dp"
+                            android:layout_marginStart="70dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/time_label"
+                            android:hint="HH:MM"
+                            android:padding="10dp"
+                            android:textColorHint="#ADADAD"
+                            android:textSize="18sp" />
 
 
-        </RelativeLayout>
+                    </RelativeLayout>
 
 
-    </RelativeLayout>
+                </RelativeLayout>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/phone_number_label_layout"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="20dp"
-            >
 
-            <Button
-                android:id="@+id/submit_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:textSize="18sp"
-                android:textColor="#ffffff"
-                android:background="#3F51B5"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:elevation="20dp"
-                />
 
-        </RelativeLayout>
+                    <Button
+                        android:id="@+id/submit_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/phone_number_label_layout"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="80dp"
+                        android:layout_centerInParent="true"
+                        android:background="#3F51B5"
+                        android:elevation="20dp"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="Submit"
+                        android:textColor="#ffffff"
+                        android:textSize="18sp" />
 
-    </RelativeLayout>
+
+
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

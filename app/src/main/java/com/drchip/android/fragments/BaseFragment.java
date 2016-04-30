@@ -32,7 +32,6 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
             ((HomeActivity) getActivity()).getmToolbar().setVisibility(View.VISIBLE);
             android.support.v7.app.ActionBar actionBar = getActionBar();
             actionBar.show();
-            actionBar.setBackgroundDrawable(new ColorDrawable(Color.BLUE));
             ((HomeActivity) getActivity()).getmToolbar().findViewById(R.id.burger).setVisibility(View.VISIBLE);
             ((HomeActivity) getActivity()).getmToolbar().findViewById(R.id.burger).setOnClickListener(this);
             ((HomeActivity) getActivity()).getmToolbar().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);

@@ -9,6 +9,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="sublimePickerStyle">@style/SPDefaultImpl</item>
+    </style>
+
+    <style name="SPDefaultImpl" parent="SublimePickerStyleLight">
+        <item name="colorAccent">#325C80</item>
+        <item name="colorPrimaryDark">#2B4F6F</item>
+        <item name="colorPrimary">#24435D</item>
+        <item name="android:textColorPrimary">#212121</item>
+        <item name="android:textColorSecondary">#727272</item>
+        <item name="android:textColorPrimaryInverse">#FFFFFF</item>
     </style>
 
 </resources>

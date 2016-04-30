@@ -47,7 +47,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
     TextView timeTextView;
     ImageView dateTimePicker;
     Button submitButton;
-    InputMethodManager imm;
+    //InputMethodManager imm;
 
     HomePageBundle homePageBundle;
 
@@ -127,8 +127,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         dateTimePicker = (ImageView) rootView.findViewById(R.id.date_picker);
         submitButton = (Button) rootView.findViewById(R.id.submit_button);
 
-        phoneNumberEditText.setOnClickListener(this);
-        imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        //imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
         dateTimePicker.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -186,10 +185,10 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        if(v.equals(phoneNumberEditText)){
-            imm.toggleSoftInput(0,0);
-            phoneNumberEditText.requestFocus();
-        }
+        //if(v.equals(phoneNumberEditText)){
+            //imm.toggleSoftInput(0,0);
+            //phoneNumberEditText.requestFocus();
+        //}
         super.onClick(v);
     }
 }
