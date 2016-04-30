@@ -8,6 +8,8 @@
 
     <include layout="@layout/custom_toolbar"></include>
 
+    <include layout="@layout/app_update_and_contactus_text"></include>
+
     <GridView xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/home_page_grid_view"
         android:layout_width="match_parent"

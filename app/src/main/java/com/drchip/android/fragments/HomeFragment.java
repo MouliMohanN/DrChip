@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.drchip.android.R;
@@ -28,6 +29,7 @@ public class HomeFragment extends BaseFragment {
 
     View rootView;
     Toolbar toolbar;
+    TextView appUdateText;
     GridView homePageGridView;
     HomePageAdapter homePageAdapter;
     BaseActivity baseActivity;
@@ -47,6 +49,8 @@ public class HomeFragment extends BaseFragment {
         getActionBar().show();
         setHasOptionsMenu(true);
         setupActionBar();
+        appUdateText = (TextView) rootView.findViewById(R.id.app_update_text);
+        appUdateText.setSelected(true);
         final List<HomePageOptions> homePageOptionsList = getHomePageOptionsList();
         homePageAdapter = new HomePageAdapter(baseActivity, homePageOptionsList);
         homePageGridView.setAdapter(homePageAdapter);
