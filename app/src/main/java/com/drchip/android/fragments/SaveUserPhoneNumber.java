@@ -28,7 +28,10 @@ import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.drchip.android.R;
+import com.drchip.android.constants.DrChipConstants;
 import com.drchip.android.models.HomePageBundle;
+import com.drchip.android.retrofit.DrChipContentManager;
+import com.google.gson.JsonObject;
 
 import java.util.Calendar;
 
@@ -127,6 +130,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         timeTextView = (TextView) rootView.findViewById(R.id.time_textview);
         dateTimePicker = (ImageView) rootView.findViewById(R.id.date_picker);
         submitButton = (Button) rootView.findViewById(R.id.submit_button);
+        submitButton.setOnClickListener(this);
         appUdateText = (TextView) rootView.findViewById(R.id.app_update_text);
         appUdateText.setSelected(true);
 
@@ -192,6 +196,40 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
             //imm.toggleSoftInput(0,0);
             //phoneNumberEditText.requestFocus();
         //}
+        if(v.equals(submitButton)){
+            String phNumber = phoneNumberEditText.getText().toString();
+            if(phNumber.isEmpty()){
+                Toast.makeText(baseActivity, "Please provide Phone Number", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            DrChipContentManager.getInstance().sayHelloWorldGet(DrChipConstants.SERVER_URL + "/hello/baby");
+            //DrChipContentManager.getInstance().sayHelloWorld(DrChipConstants.SERVER_URL + "/hello/baby" , getJsonRequest());
+        }
         super.onClick(v);
+    }
+
+    private JsonObject getJsonRequest(){
+        String osType = osTypeEditText.getText().toString();
+        String osVersion = osVersionEditText.getText().toString();
+        String date = dateTextView.getText().toString();
+        String time = timeTextView.getText().toString();
+
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.addProperty("phNumber",phoneNumberEditText.getText().toString());
+
+        if(!osType.isEmpty()){
+            jsonObject.addProperty("osType", osType);
+        }
+        if(!osVersion.isEmpty()){
+            jsonObject.addProperty("osVersion", osVersion);
+        }
+        if(!date.isEmpty()){
+            jsonObject.addProperty("date" , date);
+        }
+        if(!time.isEmpty()){
+            jsonObject.addProperty("time", time);
+        }
+
+        return jsonObject;
     }
 }

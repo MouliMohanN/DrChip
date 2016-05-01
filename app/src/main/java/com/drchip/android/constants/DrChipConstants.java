@@ -5,6 +5,8 @@ package com.drchip.android.constants;
  */
 public class DrChipConstants {
 
+    public static final String SERVER_URL = "http://localhost:8080/RESTfulExample/rest/";
+
     public final String COMPUTER_SERVICE = "ComputerService";
     public final String LAPTOP_SERVICE = "LaptopService";
     public final String ACCESSORIES = "Accessories";
