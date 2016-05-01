@@ -10,25 +10,14 @@
         android:text="New version of app is available on play store. Please update for better experience"
         android:textSize="16sp"
         android:layout_marginTop="5dp"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp"
+        android:padding="5dp"
         android:singleLine="true"
         android:scrollHorizontally="true"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"
         />
 
-    <TextView
-        android:id="@+id/contact_us_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="You can contact us anytime. Email:fifaarun@gmail.com"
-        android:textSize="16sp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:paddingRight="5dp"
-        android:paddingLeft="5dp"
-        />
+
 
 
 </LinearLayout>

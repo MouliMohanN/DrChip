@@ -29,7 +29,7 @@ public class RectangleLinearLayout extends LinearLayout{
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, widthMeasureSpec);
         int width = getMeasuredWidth();
-        int height = (int) (width * 1.166);
+        int height = width;
         setMeasuredDimension(width, height);
     }
 }
