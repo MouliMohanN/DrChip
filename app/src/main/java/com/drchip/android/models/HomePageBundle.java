@@ -10,13 +10,29 @@ public class HomePageBundle implements Parcelable {
 
     private boolean showOs;
     private String type;
+    private String name;
 
     public HomePageBundle() {
     }
 
-    public HomePageBundle(boolean showOs, String type) {
+    public HomePageBundle(boolean showOs, String type, String name) {
         this.showOs = showOs;
         this.type = type;
+        this.name = name;
+    }
+
+    public HomePageBundle(boolean showOs, String type) {
+
+        this.showOs = showOs;
+        this.type = type;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isShowOs() {
@@ -40,6 +56,7 @@ public class HomePageBundle implements Parcelable {
         return "HomePageBundle{" +
                 "showOs=" + showOs +
                 ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 
@@ -52,14 +69,16 @@ public class HomePageBundle implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeByte(showOs ? (byte) 1 : (byte) 0);
         dest.writeString(this.type);
+        dest.writeString(this.name);
     }
 
     protected HomePageBundle(Parcel in) {
         this.showOs = in.readByte() != 0;
         this.type = in.readString();
+        this.name = in.readString();
     }
 
-    public static final Parcelable.Creator<HomePageBundle> CREATOR = new Parcelable.Creator<HomePageBundle>() {
+    public static final Creator<HomePageBundle> CREATOR = new Creator<HomePageBundle>() {
         @Override
         public HomePageBundle createFromParcel(Parcel source) {
             return new HomePageBundle(source);

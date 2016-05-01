@@ -13,6 +13,24 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right">
 
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:gravity="center"
+            android:layout_marginLeft="-24dp"
+            android:text="CRE"
+            android:textSize="18sp"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:maxLines="1"
+            android:layout_height="?actionBarSize"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:freezesText="true"
+            />
+
         <View
             android:id="@+id/dummy_burger"
             android:layout_width="?actionBarSize"

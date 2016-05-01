@@ -68,6 +68,7 @@ public class HomeFragment extends BaseFragment {
                         || serviceType.equalsIgnoreCase(constants.CONTACT)){
                     // show enter phone number page
                     // place a visit
+                    homePageBundle.setName(homePageOptions.getName());
                     homePageBundle.setType(constants.PLACE_A_VISIT);
                     homePageBundle.setShowOs(false);
                     loadSaveUserPhoneNumberFragment(homePageBundle);
@@ -76,10 +77,12 @@ public class HomeFragment extends BaseFragment {
                         || serviceType.equalsIgnoreCase(constants.DATA_RECOVERY)) {
                     // show enter phone number page
                     // enquiry
+                    homePageBundle.setName(homePageOptions.getName());
                     homePageBundle.setType(constants.ENQUIRY);
                     homePageBundle.setShowOs(false);
                     loadSaveUserPhoneNumberFragment(homePageBundle);
                 } else if(serviceType.equalsIgnoreCase(constants.ONLINE_TROUBLSHOOTING)){
+                    homePageBundle.setName(homePageOptions.getName());
                     homePageBundle.setType(constants.PLACE_A_VISIT);
                     homePageBundle.setShowOs(true);
                     loadSaveUserPhoneNumberFragment(homePageBundle);
@@ -92,9 +95,20 @@ public class HomeFragment extends BaseFragment {
     }
 
     @Override
+    public void setupActionBar() {
+        super.setupActionBar();
+        setTitle("DrChip");
+    }
+
+    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
 
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     private List<HomePageOptions> getHomePageOptionsList(){

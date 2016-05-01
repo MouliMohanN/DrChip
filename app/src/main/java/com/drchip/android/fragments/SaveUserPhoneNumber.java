@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.renderscript.Sampler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.widget.Toolbar;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
@@ -42,6 +43,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
 
     View rootView;
 
+    Toolbar toolbar;
     EditText phoneNumberEditText;
     RelativeLayout osRootLayout;
     EditText osTypeEditText;
@@ -122,6 +124,10 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.save_user_phone_number, container, false);
+        toolbar = (Toolbar) rootView.findViewById(R.id.toolbar);
+        getActionBar().show();
+        setHasOptionsMenu(true);
+        setupActionBar();
         phoneNumberEditText = (EditText) rootView.findViewById(R.id.phone_number_edit_text);
         osRootLayout = (RelativeLayout) rootView.findViewById(R.id.os_root_layout);
         osTypeEditText = (EditText) rootView.findViewById(R.id.os_type_edittext);
@@ -188,6 +194,12 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         ss.setSpan(new StyleSpan(Typeface.BOLD), 0, text.length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return ss;
+    }
+
+    @Override
+    public void setupActionBar() {
+        super.setupActionBar();
+        setTitle(homePageBundle.getName());
     }
 
     @Override

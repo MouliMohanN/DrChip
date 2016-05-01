@@ -9,15 +9,13 @@
         android:layout_height="wrap_content"
         android:text="New version of app is available on play store. Please update for better experience"
         android:textSize="16sp"
-        android:layout_marginTop="5dp"
+        android:textColor="#383838"
         android:padding="5dp"
         android:singleLine="true"
         android:scrollHorizontally="true"
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"
+        android:background="#dcff00"
         />
-
-
-
 
 </LinearLayout>

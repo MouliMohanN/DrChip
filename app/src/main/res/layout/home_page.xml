@@ -40,11 +40,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="For immediate response \ncall 080 4123 9459 \nEmail:  info@drchip.in"
-        android:textSize="16sp"
+        android:textSize="14sp"
+        android:textColor="#dcff00"
         android:layout_marginTop="5dp"
-        android:padding="5dp"
+        android:padding="15dp"
         android:gravity="center"
         android:layout_alignParentBottom="true"
-        android:background="@android:color/white"
+        android:background="@mipmap/contactus_bg"
         />
 </RelativeLayout>

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.drchip.android.R;
@@ -37,6 +38,10 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
             ((HomeActivity) getActivity()).getmToolbar().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
 
         }
+    }
+
+    public void setTitle(String title) {
+        ((TextView)getActivity().findViewById(R.id.toolbar_title)).setText(title);
     }
 
     @Override
