@@ -32,6 +32,7 @@ import com.drchip.android.R;
 import com.drchip.android.constants.DrChipConstants;
 import com.drchip.android.models.HomePageBundle;
 import com.drchip.android.retrofit.DrChipContentManager;
+import com.drchip.android.views.custom.FormEditText;
 import com.google.gson.JsonObject;
 
 import java.util.Calendar;
@@ -44,7 +45,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
     View rootView;
 
     Toolbar toolbar;
-    EditText phoneNumberEditText;
+    FormEditText phoneNumberEditText;
     RelativeLayout osRootLayout;
     EditText osTypeEditText;
     EditText osVersionEditText;
@@ -128,7 +129,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         getActionBar().show();
         setHasOptionsMenu(true);
         setupActionBar();
-        phoneNumberEditText = (EditText) rootView.findViewById(R.id.phone_number_edit_text);
+        phoneNumberEditText = (FormEditText) rootView.findViewById(R.id.phone_number_edit_text);
         osRootLayout = (RelativeLayout) rootView.findViewById(R.id.os_root_layout);
         osTypeEditText = (EditText) rootView.findViewById(R.id.os_type_edittext);
         osVersionEditText = (EditText) rootView.findViewById(R.id.os_version_edittext);
@@ -209,13 +210,16 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
             //phoneNumberEditText.requestFocus();
         //}
         if(v.equals(submitButton)){
-            String phNumber = phoneNumberEditText.getText().toString();
-            if(phNumber.isEmpty()){
-                Toast.makeText(baseActivity, "Please provide Phone Number", Toast.LENGTH_SHORT).show();
-                return;
+            if(phoneNumberEditText.testValidity()){
+                String phNumber = phoneNumberEditText.getText().toString();
+                if(phNumber.isEmpty()){
+                    Toast.makeText(baseActivity, "Please provide Phone Number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(baseActivity, ":)", Toast.LENGTH_LONG).show();
+                //DrChipContentManager.getInstance().sayHelloWorldGet(DrChipConstants.SERVER_URL + "/hello/baby");
+                //DrChipContentManager.getInstance().sayHelloWorld(DrChipConstants.SERVER_URL + "/hello/baby" , getJsonRequest());
             }
-            DrChipContentManager.getInstance().sayHelloWorldGet(DrChipConstants.SERVER_URL + "/hello/baby");
-            //DrChipContentManager.getInstance().sayHelloWorld(DrChipConstants.SERVER_URL + "/hello/baby" , getJsonRequest());
         }
         super.onClick(v);
     }

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:andorid="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:clipToPadding="false"
     android:orientation="vertical">
 
@@ -11,11 +12,10 @@
         android:layout_height="match_parent"
         >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:orientation="vertical"
             >
 
 
@@ -26,52 +26,72 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_below="@id/toolbar"
                 >
 
-                <include layout="@layout/app_update_and_contactus_text"></include>
+                <include layout="@layout/app_update_and_contactus_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/app_update_text_layout"></include>
 
                 <RelativeLayout
                     android:id="@+id/phone_number_label_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="13dp"
-                    android:layout_marginLeft="13dp"
-                    android:layout_marginRight="13dp"
-                    android:layout_marginStart="13dp"
+                    android:layout_below="@id/app_update_text_layout"
                     android:elevation="10dp">
+                    <LinearLayout
+                        android:id="@+id/phone_number_linear_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        >
 
                     <TextView
                         android:id="@+id/phone_number_textview"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:padding="10dp"
-                        android:text="Ph Number *"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="9dp"
+                        android:paddingLeft="9dp"
+                        android:layout_gravity="center"
+                        android:text="Your Ph Number *"
                         android:textSize="18sp" />
 
-                    <EditText
+                    <com.drchip.android.views.custom.FormEditText
+                        xmlns:editTextFormExample="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/phone_number_edit_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
                         android:layout_toEndOf="@+id/phone_number_textview"
                         android:layout_toRightOf="@+id/phone_number_textview"
                         android:background="@null"
                         android:hint="1234567890"
                         android:maxLines="2"
-                        android:padding="10dp"
+                        android:paddingTop="5dp"
+                        android:paddingBottom="5dp"
+                        android:paddingStart="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingEnd="10dp"
+                        android:paddingLeft="10dp"
                         android:scrollbars="vertical"
                         android:text=""
                         android:textColorHint="#ADADAD"
-                        android:textSize="18sp" />
-
+                        android:textSize="18sp"
+                        android:layout_gravity="center"
+                        editTextFormExample:testType="numeric"
+                        />
+                    </LinearLayout>
                     <RelativeLayout
                         android:id="@+id/os_root_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/phone_number_edit_text"
+                        android:layout_below="@+id/phone_number_linear_layout"
                         android:layout_centerInParent="true"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="10dp">
@@ -93,8 +113,8 @@
                             android:id="@+id/os_type_edittext"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="35dp"
-                            android:layout_marginStart="35dp"
+                            android:layout_marginLeft="81dp"
+                            android:layout_marginStart="81dp"
                             android:layout_marginTop="5dp"
                             android:layout_toRightOf="@+id/os_type_textview"
                             android:background="@null"
@@ -121,11 +141,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/os_type_textview"
-                            android:layout_marginEnd="20dp"
-                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="70dp"
+                            android:layout_marginStart="70dp"
                             android:layout_toRightOf="@id/os_version_textview"
                             android:background="@null"
-                            android:hint="eg: windows 8"
+                            android:hint="eg: win 8"
                             android:maxLines="3"
                             android:padding="10dp"
                             android:scrollbars="vertical"
@@ -166,8 +186,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/when_to_contact_textview"
-                            android:layout_marginLeft="70dp"
-                            android:layout_marginStart="70dp"
+                            android:layout_marginLeft="110dp"
+                            android:layout_marginStart="110dp"
                             android:layout_marginTop="5dp"
                             android:layout_toEndOf="@+id/date_label"
                             android:layout_toRightOf="@+id/date_label"
@@ -204,8 +224,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/date_label"
-                            android:layout_marginLeft="70dp"
-                            android:layout_marginStart="70dp"
+                            android:layout_marginLeft="110dp"
+                            android:layout_marginStart="110dp"
                             android:layout_marginTop="5dp"
                             android:layout_toRightOf="@+id/time_label"
                             android:hint="HH:MM"
@@ -219,27 +239,45 @@
 
                 </RelativeLayout>
 
-
-
-                    <Button
-                        android:id="@+id/submit_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/phone_number_label_layout"
-                        android:layout_marginTop="30dp"
-                        android:layout_marginBottom="80dp"
-                        android:layout_centerInParent="true"
-                        android:background="#325C80"
-                        android:elevation="20dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="Submit"
-                        android:textColor="#ffffff"
-                        android:textSize="18sp" />
-
-
-
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/phone_number_label_layout"
+                    android:gravity="center"
+                    >
+                <Button
+                    android:id="@+id/submit_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="80dp"
+                    android:background="#325C80"
+                    android:elevation="20dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="Submit"
+                    android:textColor="#ffffff"
+                    android:textSize="18sp"
+                    />
+                </RelativeLayout>
             </RelativeLayout>
-        </LinearLayout>
+
+
+        </RelativeLayout>
     </ScrollView>
-</LinearLayout>
+    <TextView
+        android:id="@+id/contact_us_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="For immediate response \ncall 080 4123 9459 \nEmail:  info@drchip.in"
+        android:textSize="14sp"
+        android:textColor="#dcff00"
+        android:layout_marginTop="5dp"
+        android:paddingBottom="15dp"
+        android:paddingTop="5dp"
+        android:gravity="center"
+        android:layout_alignParentBottom="true"
+        android:background="@mipmap/contactus_bg"
+        />
+</RelativeLayout>
