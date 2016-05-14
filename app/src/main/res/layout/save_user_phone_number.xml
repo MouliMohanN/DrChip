@@ -196,17 +196,6 @@
                             android:textColorHint="#ADADAD"
                             android:textSize="18sp" />
 
-                        <ImageView
-                            android:id="@+id/date_picker"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/when_to_contact_textview"
-                            android:layout_marginTop="5dp"
-                            android:layout_toEndOf="@+id/date_textview"
-                            android:layout_toRightOf="@id/date_textview"
-                            android:padding="10dp"
-                            android:src="@mipmap/launch_picker" />
-
                         <TextView
                             android:id="@+id/time_label"
                             android:layout_width="wrap_content"

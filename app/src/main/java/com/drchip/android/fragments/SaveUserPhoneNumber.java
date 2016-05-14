@@ -51,7 +51,6 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
     EditText osVersionEditText;
     TextView dateTextView;
     TextView timeTextView;
-    ImageView dateTimePicker;
     Button submitButton;
     TextView appUdateText;
     //InputMethodManager imm;
@@ -135,39 +134,14 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         osVersionEditText = (EditText) rootView.findViewById(R.id.os_version_edittext);
         dateTextView = (TextView) rootView.findViewById(R.id.date_textview);
         timeTextView = (TextView) rootView.findViewById(R.id.time_textview);
-        dateTimePicker = (ImageView) rootView.findViewById(R.id.date_picker);
+        dateTextView.setOnClickListener(this);
+        timeTextView.setOnClickListener(this);
         submitButton = (Button) rootView.findViewById(R.id.submit_button);
         submitButton.setOnClickListener(this);
         appUdateText = (TextView) rootView.findViewById(R.id.app_update_text);
         appUdateText.setSelected(true);
 
         //imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        dateTimePicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // DialogFragment to host SublimePicker
-                SublimePickerFragment pickerFrag = new SublimePickerFragment();
-                pickerFrag.setCallback(mFragmentCallback);
-
-                // Options
-                Pair<Boolean, SublimeOptions> optionsPair = getOptions();
-
-                if (!optionsPair.first) { // If options are not valid
-                    Toast.makeText(baseActivity, "No pickers activated",
-                            Toast.LENGTH_SHORT).show();
-                    return;
-                }
-
-                // Valid options
-                Bundle bundle = new Bundle();
-                bundle.putParcelable("SUBLIME_OPTIONS", optionsPair.second);
-                pickerFrag.setArguments(bundle);
-
-                pickerFrag.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-                pickerFrag.show(baseActivity.getSupportFragmentManager(), "SUBLIME_PICKER");
-            }
-        });
 
         if(homePageBundle.isShowOs()){
             osRootLayout.setVisibility(View.VISIBLE);
@@ -209,6 +183,30 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
             //imm.toggleSoftInput(0,0);
             //phoneNumberEditText.requestFocus();
         //}
+
+        if(v.equals(dateTextView) || v.equals(timeTextView)){
+            // DialogFragment to host SublimePicker
+            SublimePickerFragment pickerFrag = new SublimePickerFragment();
+            pickerFrag.setCallback(mFragmentCallback);
+
+            // Options
+            Pair<Boolean, SublimeOptions> optionsPair = getOptions();
+
+            if (!optionsPair.first) { // If options are not valid
+                Toast.makeText(baseActivity, "No pickers activated",
+                        Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Valid options
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("SUBLIME_OPTIONS", optionsPair.second);
+            pickerFrag.setArguments(bundle);
+
+            pickerFrag.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+            pickerFrag.show(baseActivity.getSupportFragmentManager(), "SUBLIME_PICKER");
+        }
+
         if(v.equals(submitButton)){
             if(phoneNumberEditText.testValidity()){
                 String phNumber = phoneNumberEditText.getText().toString();
