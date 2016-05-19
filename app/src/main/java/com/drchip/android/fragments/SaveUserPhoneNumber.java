@@ -1,12 +1,9 @@
 package com.drchip.android.fragments;
 
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
+
 import android.graphics.Typeface;
-import android.media.Image;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.renderscript.Sampler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
@@ -17,10 +14,8 @@ import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,9 +24,8 @@ import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.drchip.android.R;
-import com.drchip.android.constants.DrChipConstants;
+import com.drchip.android.mail.SendMail;
 import com.drchip.android.models.HomePageBundle;
-import com.drchip.android.retrofit.DrChipContentManager;
 import com.drchip.android.views.custom.FormEditText;
 import com.google.gson.JsonObject;
 
@@ -208,6 +202,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         }
 
         if(v.equals(submitButton)){
+            new MyTask().execute();
             if(phoneNumberEditText.testValidity()){
                 String phNumber = phoneNumberEditText.getText().toString();
                 if(phNumber.isEmpty()){
@@ -245,5 +240,31 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         }
 
         return jsonObject;
+    }
+
+    public class MyTask extends AsyncTask<String, Integer,String>{
+        boolean success = false;
+        @Override
+        protected String doInBackground(String... params) {
+
+            try {
+
+                String[] strArr = { "moulimohann@gmail.com" };
+
+                success = SendMail.send(strArr, "API Test Results", "Hi, Find the attachment for test results ");
+            } catch (Exception e) {
+
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            if(success){
+                Toast.makeText(baseActivity, "sent mail", Toast.LENGTH_LONG).show();
+            }
+            super.onPostExecute(s);
+        }
     }
 }
