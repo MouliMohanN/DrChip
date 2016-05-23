@@ -50,7 +50,11 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
     //InputMethodManager imm;
 
     HomePageBundle homePageBundle;
-
+    String phNumber;
+    String osType;
+    String osVersion;
+    String date;
+    String time;
 
     SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
         @Override
@@ -202,7 +206,6 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         }
 
         if(v.equals(submitButton)){
-            new MyTask().execute();
             if(phoneNumberEditText.testValidity()){
                 String phNumber = phoneNumberEditText.getText().toString();
                 if(phNumber.isEmpty()){
@@ -210,6 +213,12 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
                     return;
                 }
                 Toast.makeText(baseActivity, ":)", Toast.LENGTH_LONG).show();
+                this.phNumber = phoneNumberEditText.getText().toString();
+                this.osType = osTypeEditText.getText().toString();
+                this.osVersion = osVersionEditText.getText().toString();
+                this.date = dateTextView.getText().toString();
+                this.time = timeTextView.getText().toString();
+                new MyTask().execute();
                 //DrChipContentManager.getInstance().sayHelloWorldGet(DrChipConstants.SERVER_URL + "/hello/baby");
                 //DrChipContentManager.getInstance().sayHelloWorld(DrChipConstants.SERVER_URL + "/hello/baby" , getJsonRequest());
             }
@@ -249,9 +258,26 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
 
             try {
 
-                String[] strArr = { "moulimohann@gmail.com" };
+                String[] strArr = { "moulimohann@gmail.com", "fifaarun@gmail.com" };
 
-                success = SendMail.send(strArr, "API Test Results", "Hi, Find the attachment for test results ");
+                String subject;
+                String body;
+
+                subject = phNumber;
+                body = "Ph Number - " + phNumber + "\n";
+                if(!osType.isEmpty()){
+                    body += "Os Type - " + osType + "\n";
+                }
+                if(!osVersion.isEmpty()){
+                    body += "Os Version - " + osVersion + "\n";
+                }
+                if(!date.isEmpty()){
+                    body += "Date - " + date + "\n";
+                }
+                if(!time.isEmpty()){
+                    body += "Time - " + time + "\n";
+                }
+                success = SendMail.send(strArr, subject, "Hi Arun, \n\n\n  Here are the details of the customer \n\n" + body);
             } catch (Exception e) {
 
                 e.printStackTrace();
