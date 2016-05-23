@@ -16,6 +16,7 @@
         android:ellipsize="marquee"
         android:marqueeRepeatLimit="marquee_forever"
         android:background="#dcff00"
+        android:visibility="invisible"
         />
 
 </LinearLayout>

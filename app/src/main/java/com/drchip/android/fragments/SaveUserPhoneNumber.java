@@ -3,6 +3,7 @@ package com.drchip.android.fragments;
 
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,9 @@ import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicke
 import com.drchip.android.R;
 import com.drchip.android.mail.SendMail;
 import com.drchip.android.models.HomePageBundle;
+import com.drchip.android.models.mobileinfo.App;
+import com.drchip.android.models.mobileinfo.Os;
+import com.drchip.android.models.mobileinfo.UserAgent;
 import com.drchip.android.views.custom.FormEditText;
 import com.google.gson.JsonObject;
 
@@ -212,7 +217,6 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
                     Toast.makeText(baseActivity, "Please provide Phone Number", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(baseActivity, ":)", Toast.LENGTH_LONG).show();
                 this.phNumber = phoneNumberEditText.getText().toString();
                 this.osType = osTypeEditText.getText().toString();
                 this.osVersion = osVersionEditText.getText().toString();
@@ -277,6 +281,17 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
                 if(!time.isEmpty()){
                     body += "Time - " + time + "\n";
                 }
+
+                try{
+                    UserAgent userAgent = getUserData();
+                    body += "\n\n\n  " + " Mobile Details "+ " \n\n";
+                    body += " AppVersion: " + userAgent.getApp().getVersion() + "\n";
+                    body += " " + userAgent.getOs().getName() + ": " + userAgent.getOs().getVersion() + " \n";
+                    body += " Device Name: " + getDeviceName();
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
                 success = SendMail.send(strArr, subject, "Hi Arun, \n\n\n  Here are the details of the customer \n\n" + body);
             } catch (Exception e) {
 
@@ -291,6 +306,51 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
                 Toast.makeText(baseActivity, "sent mail", Toast.LENGTH_LONG).show();
             }
             super.onPostExecute(s);
+        }
+
+        private UserAgent getUserData() {
+            String versionCode = "";
+            try {
+                versionCode = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName;
+            } catch (android.content.pm.PackageManager.NameNotFoundException e) {
+                Log.e("ERROR IN TERMS_OF_USE: ", e.getMessage());
+            }
+
+            Os os = new Os();
+            os.setName("Android Os Version");
+            os.setVersion(Build.VERSION.RELEASE);
+
+            App app = new App();
+            app.setVersion(versionCode);
+
+            UserAgent userAgent = new UserAgent();
+            userAgent.setApp(app);
+            userAgent.setOs(os);
+
+            return userAgent;
+        }
+
+        public String getDeviceName() {
+            String manufacturer = Build.MANUFACTURER;
+            String model = Build.MODEL;
+            if (model.startsWith(manufacturer)) {
+                return capitalize(model);
+            } else {
+                return capitalize(manufacturer) + " " + model;
+            }
+        }
+
+
+        private String capitalize(String s) {
+            if (s == null || s.length() == 0) {
+                return "";
+            }
+            char first = s.charAt(0);
+            if (Character.isUpperCase(first)) {
+                return s;
+            } else {
+                return Character.toUpperCase(first) + s.substring(1);
+            }
         }
     }
 }
