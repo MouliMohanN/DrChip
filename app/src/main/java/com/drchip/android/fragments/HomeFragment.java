@@ -6,6 +6,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -33,11 +36,13 @@ public class HomeFragment extends BaseFragment {
     GridView homePageGridView;
     HomePageAdapter homePageAdapter;
     BaseActivity baseActivity;
+    boolean isAnimated;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         baseActivity = (HomeActivity)getActivity();
+        isAnimated = false;
     }
 
     @Nullable
@@ -55,6 +60,11 @@ public class HomeFragment extends BaseFragment {
         homePageAdapter = new HomePageAdapter(baseActivity, homePageOptionsList);
         homePageGridView.setAdapter(homePageAdapter);
         final DrChipConstants constants = new DrChipConstants();
+        if(!isAnimated){
+            isAnimated = true;
+        } else {
+            homePageGridView.setLayoutAnimation(null);
+        }
         homePageGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -120,46 +130,56 @@ public class HomeFragment extends BaseFragment {
         HomePageOptions homePageOptions1 = new HomePageOptions();
         homePageOptions1.setName(getString(R.string.computer_service));
         homePageOptions1.setType(constants.COMPUTER_SERVICE);
+        homePageOptions1.setIconUrl(baseActivity.getResources().getDrawable(R.mipmap.computer_service));
+
 
         // option 2
         HomePageOptions homePageOptions2 = new HomePageOptions();
         homePageOptions2.setName(getString(R.string.laptop_service));
         homePageOptions2.setType(constants.LAPTOP_SERVICE);
+        homePageOptions2.setIconUrl(baseActivity.getResources().getDrawable(R.mipmap.laptop_service));
 
         // option 3
         HomePageOptions homePageOptions3 = new HomePageOptions();
         homePageOptions3.setName(getString(R.string.accessories));
         homePageOptions3.setType(constants.ACCESSORIES);
+        homePageOptions3.setIconUrl(baseActivity.getResources().getDrawable(R.mipmap.accessories));
 
         // option 4
         HomePageOptions homePageOptions4 = new HomePageOptions();
         homePageOptions4.setName(getString(R.string.other));
         homePageOptions4.setType(constants.OTHER);
+        homePageOptions4.setIconUrl(baseActivity.getResources().getDrawable(R.mipmap.others));
 
         // option 5
         HomePageOptions homePageOptions5 = new HomePageOptions();
         homePageOptions5.setName(getString(R.string.data_recovery));
         homePageOptions5.setType(constants.DATA_RECOVERY);
+        homePageOptions5.setIconUrl(baseActivity.getResources().getDrawable(R.mipmap.data_recovery));
 
         // option 6
         HomePageOptions homePageOptions6 = new HomePageOptions();
         homePageOptions6.setName(getString(R.string.online_troubleshooting));
         homePageOptions6.setType(constants.ONLINE_TROUBLSHOOTING);
+        homePageOptions6.setIconUrl(baseActivity.getResources().getDrawable(R.mipmap.online_trouble_shoot));
 
         // option 7
         HomePageOptions homePageOptions7 = new HomePageOptions();
         homePageOptions7.setName(getString(R.string.offers));
         homePageOptions7.setType(constants.OFFERS);
+        homePageOptions7.setIconUrl(baseActivity.getResources().getDrawable(R.mipmap.offers));
 
         // option 8
         HomePageOptions homePageOptions8 = new HomePageOptions();
         homePageOptions8.setName(getString(R.string.contact));
         homePageOptions8.setType(constants.CONTACT);
+        homePageOptions8.setIconUrl(baseActivity.getResources().getDrawable(R.mipmap.contact_us));
 
         // option 9
         HomePageOptions homePageOptions9 = new HomePageOptions();
         homePageOptions9.setName(getString(R.string.chat));
         homePageOptions9.setType(constants.CHAT);
+        homePageOptions9.setIconUrl(baseActivity.getResources().getDrawable(R.mipmap.chat));
 
         homePageOptionsList.add(homePageOptions1);
         homePageOptionsList.add(homePageOptions2);

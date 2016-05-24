@@ -1,5 +1,7 @@
 package com.drchip.android.models;
 
+import android.graphics.drawable.Drawable;
+
 /**
  * Created by mohann on 22-04-2016.
  */
@@ -7,12 +9,12 @@ public class HomePageOptions {
 
     private String name;
     private String type;
-    private String iconUrl;
+    private Drawable iconUrl;
 
     public HomePageOptions() {
     }
 
-    public HomePageOptions(String name, String type, String iconUrl) {
+    public HomePageOptions(String name, String type, Drawable iconUrl) {
         this.name = name;
         this.type = type;
         this.iconUrl = iconUrl;
@@ -34,11 +36,11 @@ public class HomePageOptions {
         this.type = type;
     }
 
-    public String getIconUrl() {
+    public Drawable getIconUrl() {
         return iconUrl;
     }
 
-    public void setIconUrl(String iconUrl) {
+    public void setIconUrl(Drawable iconUrl) {
         this.iconUrl = iconUrl;
     }
 
@@ -47,7 +49,7 @@ public class HomePageOptions {
         return "HomePageOptions{" +
                 "name='" + name + '\'' +
                 ", type='" + type + '\'' +
-                ", iconUrl='" + iconUrl + '\'' +
+                ", iconUrl='" + iconUrl.toString() + '\'' +
                 '}';
     }
 }

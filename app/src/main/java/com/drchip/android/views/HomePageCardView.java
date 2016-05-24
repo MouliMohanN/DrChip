@@ -37,6 +37,10 @@ public class HomePageCardView extends FrameLayout implements View.OnClickListene
     public void setHomePageCardView(HomePageOptions homePageOptions){
         this.homePageOptions = homePageOptions;
         serviceName.setText(homePageOptions.getName());
+        if(null != homePageOptions.getIconUrl()){
+            serviceIcon.setImageDrawable(homePageOptions.getIconUrl());
+        }
+
     }
 
     @Override

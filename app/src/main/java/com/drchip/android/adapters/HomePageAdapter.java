@@ -60,13 +60,16 @@ public class HomePageAdapter extends BaseAdapter/*RecyclerView.Adapter<RecyclerV
             homePageViewHolder = new ViewHolder();
             convertView = layoutInflater.inflate(R.layout.home_page_item_card, parent, false);
             homePageViewHolder.serviceName = (TextView) convertView.findViewById(R.id.service_name);
+            homePageViewHolder.iconUrl = (ImageView) convertView.findViewById(R.id.service_icon);
 
             convertView.setTag(homePageViewHolder);
         } else {
             homePageViewHolder = (ViewHolder)convertView.getTag();
         }
         homePageViewHolder.serviceName.setText(homePageOptions.getName());
-
+        if(null != homePageOptions.getIconUrl()){
+            homePageViewHolder.iconUrl.setImageDrawable(homePageOptions.getIconUrl());
+        }
 
         return convertView;
     }

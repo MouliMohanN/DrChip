@@ -29,9 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:numColumns="3"
-        android:verticalSpacing="3dp"
-        android:horizontalSpacing="3dp"
         android:gravity="top"
+        android:layoutAnimation="@anim/layout_random_fade"
         />
 
     </RelativeLayout>

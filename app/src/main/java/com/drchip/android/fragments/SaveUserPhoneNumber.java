@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
 import android.text.SpannableStringBuilder;
@@ -217,6 +218,8 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
                     Toast.makeText(baseActivity, "Please provide Phone Number", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                submitButton.setEnabled(false);
+                submitButton.setAlpha(0.5f);
                 this.phNumber = phoneNumberEditText.getText().toString();
                 this.osType = osTypeEditText.getText().toString();
                 this.osVersion = osVersionEditText.getText().toString();
@@ -303,7 +306,11 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         @Override
         protected void onPostExecute(String s) {
             if(success){
-                Toast.makeText(baseActivity, "sent mail", Toast.LENGTH_LONG).show();
+                submitButton.setAlpha(1f);
+                Snackbar snackbar = Snackbar
+                        .make(rootView, "Our Engineers will soon contact you!", Snackbar.LENGTH_LONG);
+                snackbar.show();
+
             }
             super.onPostExecute(s);
         }
