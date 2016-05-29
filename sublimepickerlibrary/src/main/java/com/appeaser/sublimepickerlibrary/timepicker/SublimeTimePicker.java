@@ -374,6 +374,19 @@ public class SublimeTimePicker extends FrameLayout
         }
     }
 
+    public String getmAmText(){
+        String amPmText = "";
+        switch (mRadialTimePickerView.getAmOrPm()){
+            case PM:
+                amPmText = "PM";
+                break;
+            case AM:
+                amPmText = "AM";
+                break;
+        }
+        return amPmText;
+    }
+
     /**
      * Set the current hour.
      */

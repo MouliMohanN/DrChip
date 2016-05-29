@@ -48,7 +48,7 @@
             android:padding="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginRight="10dp"
-            android:src="@mipmap/menu"
+            android:src="@mipmap/ic_launcher"
             android:visibility="visible" />
     </RelativeLayout>
 </android.support.v7.widget.Toolbar>

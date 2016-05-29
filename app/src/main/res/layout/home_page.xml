@@ -38,7 +38,7 @@
         android:id="@+id/contact_us_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="For immediate response \ncall 080 4123 9459 \nEmail:  info@drchip.in"
+        android:text="For immediate response \nCall 080 4123 9459 \nEmail:  info@drchip.in"
         android:textSize="14sp"
         android:textColor="@android:color/white"
         android:layout_marginTop="5dp"

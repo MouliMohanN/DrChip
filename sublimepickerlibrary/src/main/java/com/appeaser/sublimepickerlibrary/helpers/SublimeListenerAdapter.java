@@ -38,7 +38,7 @@ public abstract class SublimeListenerAdapter {
      */
     public abstract void onDateTimeRecurrenceSet(SublimePicker sublimeMaterialPicker,
                                                  SelectedDate selectedDate,
-                                                 int hourOfDay, int minute,
+                                                 int hourOfDay, int minute, String amPmText,
                                                  SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
                                                  String recurrenceRule);
 

@@ -138,10 +138,12 @@ public class SublimePicker extends FrameLayout
             }
 
             int hour = -1, minute = -1;
+            String amPmText = "";
 
             if (mTimePickerEnabled) {
                 hour = mTimePicker.getCurrentHour();
                 minute = mTimePicker.getCurrentMinute();
+                amPmText = mTimePicker.getmAmText();
             }
 
             SublimeRecurrencePicker.RecurrenceOption recurrenceOption
@@ -160,7 +162,7 @@ public class SublimePicker extends FrameLayout
                     // DatePicker
                     selectedDate,
                     // TimePicker
-                    hour, minute,
+                    hour, minute, amPmText,
                     // RecurrencePicker
                     recurrenceOption, recurrenceRule);
         }
@@ -593,7 +595,7 @@ public class SublimePicker extends FrameLayout
         }
 
         if (mDatePickerEnabled && mTimePickerEnabled) {
-            mButtonLayout.applyOptions(true /* show switch button */,
+            mButtonLayout.applyOptions(false /* show switch button */,
                     mButtonLayoutCallback);
         } else {
             mButtonLayout.applyOptions(false /* hide switch button */,

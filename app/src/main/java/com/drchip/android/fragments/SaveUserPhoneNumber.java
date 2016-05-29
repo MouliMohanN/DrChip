@@ -1,6 +1,7 @@
 package com.drchip.android.fragments;
 
 
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -9,14 +10,17 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
+import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextWatcher;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -28,6 +32,7 @@ import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.drchip.android.R;
 import com.drchip.android.mail.SendMail;
+import com.drchip.android.models.DateInfo;
 import com.drchip.android.models.HomePageBundle;
 import com.drchip.android.models.mobileinfo.App;
 import com.drchip.android.models.mobileinfo.Os;
@@ -53,6 +58,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
     TextView timeTextView;
     Button submitButton;
     TextView appUdateText;
+    DateInfo dateInfo = new DateInfo();
     //InputMethodManager imm;
 
     HomePageBundle homePageBundle;
@@ -62,6 +68,8 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
     String date;
     String time;
 
+    InputMethodManager imm;
+
     SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
         @Override
         public void onCancelled() {
@@ -70,7 +78,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
 
         @Override
         public void onDateTimeRecurrenceSet(SelectedDate selectedDate,
-                                            int hourOfDay, int minute,
+                                            int hourOfDay, int minute, String amPmText,
                                             SublimeRecurrencePicker.RecurrenceOption recurrenceOption,
                                             String recurrenceRule) {
 
@@ -83,7 +91,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
                     recurrenceRule : "n/a";*/
 
             //dateTextView.setText(selectedDate.get);
-            String day = String.valueOf(selectedDate.getStartDate().get(Calendar.DAY_OF_MONTH));
+            /*String day = String.valueOf(selectedDate.getStartDate().get(Calendar.DAY_OF_MONTH));
             String month = String.valueOf(selectedDate.getStartDate().get(Calendar.MONTH) + 1);
             String year = String.valueOf(selectedDate.getStartDate().get(Calendar.YEAR));
             if(Integer.valueOf(day) < 10){
@@ -91,6 +99,10 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
             }
             if(Integer.valueOf(month) < 10){
                 month = 0 + "" + month;
+            }*/
+
+            if(hourOfDay > 12){
+                hourOfDay -= 12;
             }
 
             String hour = String.valueOf(hourOfDay);
@@ -101,15 +113,16 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
             if(minute < 10){
                 min = 0 + "" + minute;
             }
-            dateTextView.setText(applyBoldStyle(day)
+            /*dateTextView.setText(applyBoldStyle(day)
                     .append("/")
                     .append(applyBoldStyle(month))
                     .append("/")
-                    .append(applyBoldStyle(year)));
+                    .append(applyBoldStyle(year)));*/
 
             timeTextView.setText(applyBoldStyle(hour)
                     .append(":")
-                    .append(applyBoldStyle(min)));
+                    .append(applyBoldStyle(min))
+                    .append(" " + applyBoldStyle(amPmText)));
             //updateInfoView();
 
 
@@ -132,6 +145,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         getActionBar().show();
         setHasOptionsMenu(true);
         setupActionBar();
+        imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         phoneNumberEditText = (FormEditText) rootView.findViewById(R.id.phone_number_edit_text);
         osRootLayout = (RelativeLayout) rootView.findViewById(R.id.os_root_layout);
         osTypeEditText = (EditText) rootView.findViewById(R.id.os_type_edittext);
@@ -144,6 +158,64 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         submitButton.setOnClickListener(this);
         appUdateText = (TextView) rootView.findViewById(R.id.app_update_text);
         appUdateText.setSelected(true);
+
+        phoneNumberEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(0 != phoneNumberEditText.getText().length()){
+                    applyBoldStyle(phoneNumberEditText.getText().toString());
+                }
+            }
+        });
+
+        osTypeEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(0 != osTypeEditText.getText().length()){
+                    applyBoldStyle(osTypeEditText.getText().toString());
+                }
+            }
+        });
+
+        osVersionEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(0 != osVersionEditText.getText().length()){
+                    applyBoldStyle(osVersionEditText.getText().toString());
+                }
+
+            }
+        });
 
         //imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 
@@ -162,13 +234,16 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         SublimeOptions options = new SublimeOptions();
         int displayOptions = SublimeOptions.ACTIVATE_DATE_PICKER | SublimeOptions.ACTIVATE_TIME_PICKER;
 
-        options.setPickerToShow(SublimeOptions.Picker.DATE_PICKER);
+        options.setPickerToShow(SublimeOptions.Picker.TIME_PICKER);
         options.setDisplayOptions(displayOptions);
 
         return new Pair<>(displayOptions != 0 ? Boolean.TRUE : Boolean.FALSE, options);
     }
 
     private SpannableStringBuilder applyBoldStyle(String text) {
+        if(null == text){
+            text = "";
+        }
         SpannableStringBuilder ss = new SpannableStringBuilder(text);
         ss.setSpan(new StyleSpan(Typeface.BOLD), 0, text.length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -188,7 +263,15 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
             //phoneNumberEditText.requestFocus();
         //}
 
-        if(v.equals(dateTextView) || v.equals(timeTextView)){
+        if(v.equals(dateTextView)){
+            BasicCalendar basicCalendar = new BasicCalendar();
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("dateInfo", dateInfo);
+            basicCalendar.setArguments(bundle);
+            baseActivity.loadFragment(basicCalendar, true, BasicCalendar.class.getName());
+        }
+
+        if(v.equals(timeTextView)){
             // DialogFragment to host SublimePicker
             SublimePickerFragment pickerFrag = new SublimePickerFragment();
             pickerFrag.setCallback(mFragmentCallback);
@@ -359,5 +442,19 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
                 return Character.toUpperCase(first) + s.substring(1);
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        dateTextView.setText(applyBoldStyle(dateInfo.getDate()));
+    }
+
+    @Override
+    public void onPause() {
+
+        imm.hideSoftInputFromWindow(baseActivity.getCurrentFocus().getWindowToken(), 0);
+
+        super.onPause();
     }
 }

@@ -46,6 +46,7 @@ dependencies {
     compile 'com.android.support:design:23.4.0'
     compile 'com.sun.mail:android-mail:1.5.5'
     compile 'com.sun.mail:android-activation:1.5.5'
+    compile 'com.jakewharton:butterknife:7.0.1'
     compile project(':sublimepickerlibrary')
     compile 'com.nineoldandroids:library:2.4.0'
 }
