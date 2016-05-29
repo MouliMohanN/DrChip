@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_red_light"
+        >
+
+        <ImageView
+            android:id="@+id/full_screen_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            />
+
+        <RelativeLayout
+            android:id="@+id/rl_to_rotate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/image_icon_rl"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                >
+
+                <ImageView
+                    android:id="@+id/drchip_icon"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:adjustViewBounds="true"
+                    android:src="@mipmap/ic_launcher"
+                    android:layout_centerInParent="true"
+                    />
+
+                <TextView
+                    android:id="@+id/welcome_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="welcome!"
+                    android:layout_below="@+id/drchip_icon"
+
+                    android:gravity="center"
+                    />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
+
+
+</RelativeLayout>
