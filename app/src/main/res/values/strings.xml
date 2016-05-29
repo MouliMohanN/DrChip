@@ -23,4 +23,10 @@
     <string name="error_notvalid_personname">Not a valid first or last name.</string>
     <string name="error_notvalid_personfullname">Not a valid full name.</string>
     <string name="error_date_not_valid">Format not valid</string>
+
+
+    <string name="previous">Go to previous</string>
+    <string name="next">Go to next</string>
+    <string name="calendar">Calendar</string>
+
 </resources>
