@@ -351,10 +351,13 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
                 String[] strArr = { "moulimohann@gmail.com", "fifaarun@gmail.com" };
 
                 String subject;
-                String body;
+                String body = "";
 
                 subject = phNumber;
-                body = "Ph Number - " + phNumber + "\n";
+                if(!homePageBundle.getName().isEmpty()){
+                    body = homePageBundle.getName() + "\n";
+                }
+                body += "Ph Number - " + phNumber + "\n";
                 if(!osType.isEmpty()){
                     body += "Os Type - " + osType + "\n";
                 }
@@ -389,6 +392,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         @Override
         protected void onPostExecute(String s) {
             if(success){
+                submitButton.setEnabled(true);
                 submitButton.setAlpha(1f);
                 Snackbar snackbar = Snackbar
                         .make(rootView, "Our Engineers will soon contact you!", Snackbar.LENGTH_LONG);
@@ -453,7 +457,9 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
     @Override
     public void onPause() {
 
-        imm.hideSoftInputFromWindow(baseActivity.getCurrentFocus().getWindowToken(), 0);
+        if(null != baseActivity.getCurrentFocus() && null != baseActivity.getCurrentFocus().getWindowToken()){
+            imm.hideSoftInputFromWindow(baseActivity.getCurrentFocus().getWindowToken(), 0);
+        }
 
         super.onPause();
     }

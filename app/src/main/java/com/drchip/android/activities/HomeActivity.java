@@ -1,5 +1,6 @@
 package com.drchip.android.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
@@ -29,6 +30,15 @@ public class HomeActivity extends BaseActivity {
         if (null != getSupportActionBar()) {
             getSupportActionBar().hide();
         }
+    }
+
+    public void loadWebViewActivity(){
+        Intent intent = new Intent(this, WebViewActivity.class);
+        Bundle bundle = new Bundle();
+        String loadUrl = "http://drchip.in/";
+        bundle.putString("loadUrl", loadUrl);
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
 }

@@ -61,6 +61,7 @@
                         android:paddingLeft="9dp"
                         android:layout_gravity="center"
                         android:text="Your Ph Number *"
+                        android:textColor="#325C80"
                         android:textSize="18sp" />
 
                     <com.drchip.android.views.custom.FormEditText
@@ -70,11 +71,11 @@
                         android:layout_height="wrap_content"
                         android:layout_toEndOf="@+id/phone_number_textview"
                         android:layout_toRightOf="@+id/phone_number_textview"
-                        android:background="@null"
+
                         android:hint="1234567890"
                         android:maxLines="2"
                         android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
+                        android:paddingBottom="10dp"
                         android:paddingStart="10dp"
                         android:paddingRight="10dp"
                         android:paddingEnd="10dp"
@@ -107,6 +108,7 @@
                             android:layout_marginTop="5dp"
                             android:padding="10dp"
                             android:text="OS Type"
+                            android:textColor="#325C80"
                             android:textSize="18sp" />
 
                         <EditText
@@ -117,9 +119,9 @@
                             android:layout_marginStart="81dp"
                             android:layout_marginTop="5dp"
                             android:layout_toRightOf="@+id/os_type_textview"
-                            android:background="@null"
+
                             android:hint="eg: windows"
-                            android:maxLines="3"
+                            android:maxLines="1"
                             android:padding="10dp"
                             android:scrollbars="vertical"
                             android:textColorHint="#ADADAD" />
@@ -134,6 +136,7 @@
                             android:layout_marginTop="5dp"
                             android:padding="10dp"
                             android:text="OS Version"
+                            android:textColor="#325C80"
                             android:textSize="18sp" />
 
                         <EditText
@@ -144,9 +147,9 @@
                             android:layout_marginEnd="70dp"
                             android:layout_marginStart="70dp"
                             android:layout_toRightOf="@id/os_version_textview"
-                            android:background="@null"
+
                             android:hint="eg: win 8"
-                            android:maxLines="3"
+                            android:maxLines="1"
                             android:padding="10dp"
                             android:scrollbars="vertical"
                             android:textColorHint="#ADADAD" />
@@ -166,7 +169,9 @@
                             android:layout_marginTop="5dp"
                             android:enabled="false"
                             android:padding="10dp"
+                            android:gravity="center"
                             android:text="When to contact"
+                            android:textColor="#325C80"
                             android:textSize="18sp" />
 
                         <TextView
@@ -179,6 +184,7 @@
                             android:layout_marginTop="5dp"
                             android:padding="10dp"
                             android:text="Date: "
+                            android:textColor="#325C80"
                             android:textSize="18sp" />
 
                         <TextView
@@ -206,6 +212,7 @@
                             android:layout_marginTop="5dp"
                             android:padding="10dp"
                             android:text="Time: "
+                            android:textColor="#325C80"
                             android:textSize="18sp" />
 
                         <TextView

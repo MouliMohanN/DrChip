@@ -5,14 +5,13 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_red_light"
+        android:background="#325C80"
         >
 
         <ImageView
             android:id="@+id/full_screen_image_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             />
 
         <RelativeLayout
@@ -41,6 +40,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="welcome!"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/white"
                     android:layout_below="@+id/drchip_icon"
 
                     android:gravity="center"

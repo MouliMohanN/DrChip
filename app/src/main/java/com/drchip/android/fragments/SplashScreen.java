@@ -1,5 +1,6 @@
 package com.drchip.android.fragments;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -8,13 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.drchip.android.R;
 import com.drchip.android.activities.BaseActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mohann on 29-05-2016.
@@ -36,6 +39,7 @@ public class SplashScreen extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.splash_screen_view, container, false);
         baseActivity = (BaseActivity) getActivity();
+
         drChipIcon = (ImageView) rootView.findViewById(R.id.drchip_icon);
         drChipIconRl = (RelativeLayout) rootView.findViewById(R.id.image_icon_rl);
         rlToRotate = (RelativeLayout) rootView.findViewById(R.id.rl_to_rotate);
@@ -91,21 +95,12 @@ public class SplashScreen extends BaseFragment {
     }
 
 
-
-
-    private class Zoom implements Runnable {
-        @Override
-        public void run() {
-            while (true) {
-                baseActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        drChipIcon.startAnimation(zoomOut);
-                    }
-                });
-
-            }
+    private List<Drawable> getImageDrawables(){
+        List<Drawable> drawableList = new ArrayList<Drawable>();
+        for(int i = 0; i < 10; i++){
+            drawableList.add(baseActivity.getResources().getDrawable(R.mipmap.splash_bg));
         }
+        return drawableList;
     }
 
 }

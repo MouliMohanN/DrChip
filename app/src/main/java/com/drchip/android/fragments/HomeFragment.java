@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,12 +29,13 @@ import java.util.List;
 /**
  * Created by mohann on 22-04-2016.
  */
-public class HomeFragment extends BaseFragment {
+public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     View rootView;
     Toolbar toolbar;
     TextView appUdateText;
     GridView homePageGridView;
+    ImageView loadDrChipWebSite;
     HomePageAdapter homePageAdapter;
     BaseActivity baseActivity;
     boolean isAnimated;
@@ -54,6 +56,7 @@ public class HomeFragment extends BaseFragment {
         getActionBar().show();
         setHasOptionsMenu(true);
         setupActionBar();
+        loadDrChipWebSite = (ImageView) rootView.findViewById(R.id.drchip_load_website_icon);
         appUdateText = (TextView) rootView.findViewById(R.id.app_update_text);
         appUdateText.setSelected(true);
         final List<HomePageOptions> homePageOptionsList = getHomePageOptionsList();
@@ -65,6 +68,7 @@ public class HomeFragment extends BaseFragment {
         } else {
             homePageGridView.setLayoutAnimation(null);
         }
+        //loadDrChipWebSite.setOnClickListener(this);
         homePageGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

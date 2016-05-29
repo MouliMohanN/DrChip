@@ -4,4 +4,5 @@
     <color name="colorPrimaryDark">#24435D</color>
     <color name="colorAccent">#325C80</color>
     <color name="titleColor">#343434</color>
+    <color name="more_comment_color">#ff9838</color>
 </resources>

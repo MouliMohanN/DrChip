@@ -33,8 +33,8 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
             ((HomeActivity) getActivity()).getmToolbar().setVisibility(View.VISIBLE);
             android.support.v7.app.ActionBar actionBar = getActionBar();
             actionBar.show();
-            ((HomeActivity) getActivity()).getmToolbar().findViewById(R.id.burger).setVisibility(View.VISIBLE);
-            ((HomeActivity) getActivity()).getmToolbar().findViewById(R.id.burger).setOnClickListener(this);
+            ((HomeActivity) getActivity()).getmToolbar().findViewById(R.id.drchip_load_website_icon).setVisibility(View.VISIBLE);
+            ((HomeActivity) getActivity()).getmToolbar().findViewById(R.id.drchip_load_website_icon).setOnClickListener(this);
             ((HomeActivity) getActivity()).getmToolbar().findViewById(R.id.toolbar).setVisibility(View.VISIBLE);
 
         }
@@ -51,8 +51,9 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v.equals(((HomeActivity) getActivity()).getmToolbar().findViewById(R.id.burger))){
-            Toast.makeText(baseActivity, "on help Clicked", Toast.LENGTH_SHORT).show();
+        if(v.equals(((HomeActivity) getActivity()).getmToolbar().findViewById(R.id.drchip_load_website_icon))){
+            //Toast.makeText(baseActivity, "on help Clicked", Toast.LENGTH_SHORT).show();
+            ((HomeActivity)baseActivity).loadWebViewActivity();
         }
     }
 
