@@ -3,6 +3,7 @@ package com.drchip.android.fragments;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.drchip.android.R;
 import com.drchip.android.activities.BaseActivity;
 import com.drchip.android.activities.HomeActivity;
+import com.drchip.android.utils.NetworkUtils;
 
 public class BaseFragment extends Fragment implements View.OnClickListener {
 
@@ -53,7 +55,14 @@ public class BaseFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if(v.equals(((HomeActivity) getActivity()).getmToolbar().findViewById(R.id.drchip_load_website_icon))){
             //Toast.makeText(baseActivity, "on help Clicked", Toast.LENGTH_SHORT).show();
-            ((HomeActivity)baseActivity).loadWebViewActivity();
+            if(NetworkUtils.isNetworkConnected(baseActivity)){
+                ((HomeActivity)baseActivity).loadWebViewActivity();
+            } else {
+                Snackbar snackbar = Snackbar
+                        .make(v, "No Internet Connection!", Snackbar.LENGTH_LONG);
+                snackbar.show();
+            }
+
         }
     }
 

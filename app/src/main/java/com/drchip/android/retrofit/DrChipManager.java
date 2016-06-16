@@ -23,6 +23,7 @@ public class DrChipManager {
     }
 
     public static ContentService getContentService(){
+        initializeContentService();
         return contentService;
     }
 

@@ -25,15 +25,17 @@ public class SendMail {
 		}
 	}
 
-	public static boolean send(String[] to, String subject, String message) {
+	public static String send(String[] to, String subject, String message) {
 
-		return SendMail.sendMail("moulimohanntest@gmail.com", "moulimohann123", "smtp.gmail.com", "465", "true", "true", true,
+		return SendMail.sendMail("smartcuesapitest@gmail.com", "smartcues", "smtp.gmail.com", "465", "true", "true", true,
 				"javax.net.ssl.SSLSocketFactory", "false", to, subject, message);
 	}
 
-	public synchronized static boolean sendMail(String userName, String passWord, String host, String port,
+	public synchronized static String sendMail(String userName, String passWord, String host, String port,
 			String starttls, String auth, boolean debug, String socketFactoryClass, String fallback, String[] to,
 			String subject, String text) {
+
+		String errorMessage = "";
 
 		Properties props = new Properties();
 		props.put("mail.smtp.user", userName);
@@ -55,6 +57,13 @@ public class SendMail {
 		if (!"".equals(fallback))
 			props.put("mail.smtp.socketFactory.fallback", fallback);
 		try {
+			/*try{
+				props.put("mail.smtp.connectiontimeout", 10000000 * 60);
+				props.put("mail.smtp.timeout", 10000000 * 60);
+			} catch (Exception e) {
+				errorMessage += "\n\n\n timeout exception " + e.getMessage() + " \n\n\n";
+			}*/
+
 			Session session = Session.getDefaultInstance(props);
 
 			// session.setDebug(debug);
@@ -77,13 +86,15 @@ public class SendMail {
 			}
 			msg.saveChanges();
 			Transport transport = session.getTransport("smtp");
-			transport.connect(host, userName, passWord);
+			transport.connect(host,Integer.parseInt(port), userName, passWord);
 			transport.sendMessage(msg, msg.getAllRecipients());
 			transport.close();
-			return true;
+			errorMessage += "\n\nActual Email success\n\n";
+			return errorMessage;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
+			errorMessage = "\n\n Actual Email failed: " + e.getMessage() + " \n\n";
+			return errorMessage;
 		}
 
 	}

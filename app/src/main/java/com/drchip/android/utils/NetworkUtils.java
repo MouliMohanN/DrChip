@@ -6,6 +6,8 @@ import android.net.NetworkInfo;
 import android.telephony.TelephonyManager;
 
 import com.drchip.android.DrChipApplication;
+import com.drchip.android.activities.BaseActivity;
+
 import java.io.IOException;
 
 /**
@@ -29,8 +31,8 @@ public class NetworkUtils {
     * This method returns true if you are Connected to a wifi which doesn't have internet connection,
     * so use isSocketConnected instead
     * */
-    public static boolean isNetworkConnected() {
-        ConnectivityManager connManager = (ConnectivityManager) DrChipApplication.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+    public static boolean isNetworkConnected(BaseActivity baseActivity) {
+        ConnectivityManager connManager = (ConnectivityManager) baseActivity.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connManager.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();

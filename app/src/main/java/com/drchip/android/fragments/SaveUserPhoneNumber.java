@@ -2,6 +2,7 @@ package com.drchip.android.fragments;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -31,12 +32,15 @@ import com.appeaser.sublimepickerlibrary.datepicker.SelectedDate;
 import com.appeaser.sublimepickerlibrary.helpers.SublimeOptions;
 import com.appeaser.sublimepickerlibrary.recurrencepicker.SublimeRecurrencePicker;
 import com.drchip.android.R;
+import com.drchip.android.mail.GMailSender;
 import com.drchip.android.mail.SendMail;
 import com.drchip.android.models.DateInfo;
 import com.drchip.android.models.HomePageBundle;
 import com.drchip.android.models.mobileinfo.App;
 import com.drchip.android.models.mobileinfo.Os;
 import com.drchip.android.models.mobileinfo.UserAgent;
+import com.drchip.android.retrofit.DrChipContentManager;
+import com.drchip.android.utils.NetworkUtils;
 import com.drchip.android.views.custom.FormEditText;
 import com.google.gson.JsonObject;
 
@@ -69,6 +73,10 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
     String time;
 
     InputMethodManager imm;
+
+    RelativeLayout topRelativeLayout;
+    RelativeLayout bottomRelativeLayout;
+    TextView errorMessageTextView;
 
     SublimePickerFragment.Callback mFragmentCallback = new SublimePickerFragment.Callback() {
         @Override
@@ -225,6 +233,16 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
             osRootLayout.setVisibility(View.GONE);
         }
         submitButton.setText(homePageBundle.getType());
+
+
+        topRelativeLayout = (RelativeLayout) rootView.findViewById(R.id.top_rl);
+        topRelativeLayout.setVisibility(View.VISIBLE);
+
+        bottomRelativeLayout = (RelativeLayout) rootView.findViewById(R.id.bottom_rl);
+        bottomRelativeLayout.setVisibility(View.GONE);
+
+        errorMessageTextView = (TextView) rootView.findViewById(R.id.error_message);
+
         return rootView;
     }
 
@@ -295,22 +313,37 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         }
 
         if(v.equals(submitButton)){
-            if(phoneNumberEditText.testValidity()){
-                String phNumber = phoneNumberEditText.getText().toString();
-                if(phNumber.isEmpty()){
-                    Toast.makeText(baseActivity, "Please provide Phone Number", Toast.LENGTH_SHORT).show();
-                    return;
+            if(NetworkUtils.isNetworkConnected(baseActivity)){
+                if(phoneNumberEditText.testValidity()){
+                    String phNumber = phoneNumberEditText.getText().toString();
+                    if(phNumber.isEmpty()){
+                        Toast.makeText(baseActivity, "Please provide Phone Number", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    submitButton.setEnabled(false);
+                    submitButton.setAlpha(0.5f);
+                    this.phNumber = phoneNumberEditText.getText().toString();
+                    this.osType = osTypeEditText.getText().toString();
+                    this.osVersion = osVersionEditText.getText().toString();
+                    this.date = dateTextView.getText().toString();
+                    this.time = timeTextView.getText().toString();
+
+                    new MyTask1().execute();
+
+
+
+                    //new MyTask().execute();
+
+
+
+
+                    //DrChipContentManager.getInstance().sayHelloWorldGet(DrChipConstants.SERVER_URL + "/hello/baby");
+                    //DrChipContentManager.getInstance().sayHelloWorld(DrChipConstants.SERVER_URL + "/hello/baby" , getJsonRequest());
                 }
-                submitButton.setEnabled(false);
-                submitButton.setAlpha(0.5f);
-                this.phNumber = phoneNumberEditText.getText().toString();
-                this.osType = osTypeEditText.getText().toString();
-                this.osVersion = osVersionEditText.getText().toString();
-                this.date = dateTextView.getText().toString();
-                this.time = timeTextView.getText().toString();
-                new MyTask().execute();
-                //DrChipContentManager.getInstance().sayHelloWorldGet(DrChipConstants.SERVER_URL + "/hello/baby");
-                //DrChipContentManager.getInstance().sayHelloWorld(DrChipConstants.SERVER_URL + "/hello/baby" , getJsonRequest());
+            } else {
+                Snackbar snackbar = Snackbar
+                        .make(rootView, "No Internet Connection!", Snackbar.LENGTH_LONG);
+                snackbar.show();
             }
         }
         super.onClick(v);
@@ -341,14 +374,37 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
         return jsonObject;
     }
 
+    public class MyTask1 extends AsyncTask<String, Integer, String>{
+        @Override
+        protected String doInBackground(String... params) {
+            UserAgent userAgent = getUserData();
+
+            JsonObject jsonObject = new JsonObject();
+            jsonObject.addProperty("phone", phNumber);
+            jsonObject.addProperty("email", "moulimohann@gmail.com");
+            jsonObject.addProperty("name",getDeviceName());
+            jsonObject.addProperty("message",userAgent.getOs().getName() + " " + userAgent.getOs().getVersion());
+            DrChipContentManager.getInstance().sendMail(jsonObject);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+    }
+
+
+
     public class MyTask extends AsyncTask<String, Integer,String>{
         boolean success = false;
+        String errorMessage = "";
         @Override
         protected String doInBackground(String... params) {
 
             try {
 
-                String[] strArr = { "moulimohann@gmail.com", "fifaarun@gmail.com" };
+                String[] strArr = { "moulimohann@gmail.com"/*, "fifaarun@gmail.com"*/ };
 
                 String subject;
                 String body = "";
@@ -378,12 +434,28 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
                     body += " " + userAgent.getOs().getName() + ": " + userAgent.getOs().getVersion() + " \n";
                     body += " Device Name: " + getDeviceName();
                 } catch (Exception e){
+                    errorMessage += " UserAgent Exception: \n\n" + e.getMessage() + " \n\n\n\n" + e.getStackTrace() + " \n\n\n\n";
+                    errorMessage += " ------------------------------------------------------ \n\n\n\n";
                     e.printStackTrace();
                 }
 
-                success = SendMail.send(strArr, subject, "Hi Arun, \n\n\n  Here are the details of the customer \n\n" + body);
+                //success = SendMail.send(strArr, subject, "Hi Arun, \n\n\n  Here are the details of the customer \n\n" + body);
+                //errorMessage += SendMail.send(strArr, subject, "Hi Arun, \n\n\n  Here are the details of the customer \n\n" + body);
+                try {
+                    GMailSender sender = new GMailSender("moulimohanntest@gmail.com", "moulimohann123");
+                    success = sender.sendMail(subject,
+                            body,
+                            "moulimohann@gmail.com",
+                            "moulimohann@gmail.com,fifaarun@gmail.com");
+                    errorMessage += sender.getErrorMessage();
+                } catch (Exception e) {
+                    Log.e("SendMail", e.getMessage(), e);
+                    e.printStackTrace();
+                    errorMessage += e.getMessage();
+                }
+                //errorMessage += "\n\n\n Success " + success + " \n\n\n";
             } catch (Exception e) {
-
+                errorMessage += " Outer Exception: \n\n" + e.getMessage() + " \n\n\n " + e.getStackTrace().toString() + " \n\n\n\n";
                 e.printStackTrace();
             }
             return null;
@@ -391,6 +463,7 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
 
         @Override
         protected void onPostExecute(String s) {
+            //if(errorMessage.contains("Actual Email success") || errorMessage.equalsIgnoreCase("Actual Email success")){
             if(success){
                 submitButton.setEnabled(true);
                 submitButton.setAlpha(1f);
@@ -398,6 +471,15 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
                         .make(rootView, "Our Engineers will soon contact you!", Snackbar.LENGTH_LONG);
                 snackbar.show();
 
+            } else {
+                Snackbar snackbar = Snackbar
+                        .make(rootView, "Mail Not Sent", Snackbar.LENGTH_LONG);
+                snackbar.show();
+                submitButton.setEnabled(true);
+                submitButton.setAlpha(0f);
+                topRelativeLayout.setVisibility(View.GONE);
+                bottomRelativeLayout.setVisibility(View.VISIBLE);
+                errorMessageTextView.setText(errorMessage);
             }
             super.onPostExecute(s);
         }
@@ -463,4 +545,49 @@ public class SaveUserPhoneNumber extends BaseFragment implements View.OnClickLis
 
         super.onPause();
     }
+
+    private UserAgent getUserData() {
+        String versionCode = "";
+        try {
+            versionCode = getActivity().getPackageManager().getPackageInfo(getActivity().getPackageName(), 0).versionName;
+        } catch (android.content.pm.PackageManager.NameNotFoundException e) {
+            Log.e("ERROR IN TERMS_OF_USE: ", e.getMessage());
+        }
+
+        Os os = new Os();
+        os.setName("Android Os Version");
+        os.setVersion(Build.VERSION.RELEASE);
+
+        App app = new App();
+        app.setVersion(versionCode);
+
+        UserAgent userAgent = new UserAgent();
+        userAgent.setApp(app);
+        userAgent.setOs(os);
+
+        return userAgent;
+    }
+
+    public String getDeviceName() {
+        String manufacturer = Build.MANUFACTURER;
+        String model = Build.MODEL;
+        if (model.startsWith(manufacturer)) {
+            return capitalize(model);
+        } else {
+            return capitalize(manufacturer) + " " + model;
+        }
+    }
+
+    private String capitalize(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+        char first = s.charAt(0);
+        if (Character.isUpperCase(first)) {
+            return s;
+        } else {
+            return Character.toUpperCase(first) + s.substring(1);
+        }
+    }
+
 }
